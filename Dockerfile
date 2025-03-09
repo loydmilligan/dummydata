@@ -24,6 +24,9 @@ RUN echo "0 2 1 * * /app/run_monthly_update.sh >> /app/logs/cron.log 2>&1" > /et
 RUN chmod 0644 /etc/cron.d/data-generator
 RUN crontab /etc/cron.d/data-generator
 
+# Create necessary directories
+RUN mkdir -p /app/logs /app/fuel_orders_data/csv_data/products /app/fuel_orders_data/csv_data/customers /app/fuel_orders_data/csv_data/orders
+
 # Create volume mount points
 VOLUME ["/app/fuel_orders_data", "/app/logs"]
 

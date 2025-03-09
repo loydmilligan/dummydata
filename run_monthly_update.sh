@@ -17,8 +17,8 @@ cd "$(dirname "$0")" || {
 }
 
 # Run the data generation with proper Python path
-# Using the auto flag to generate just the current month
-python3 generate_monthly.py --auto 2>&1 | tee -a "$LOG_FILE"
+# Generate just the current month
+python3 generate_monthly.py 2>&1 | tee -a "$LOG_FILE"
 
 # Record completion
 echo "Completed monthly data generation at $(date)" | tee -a "$LOG_FILE"
