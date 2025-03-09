@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+  data-generator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: petroleum-data-generator
+    restart: unless-stopped
+    volumes:
+      - ./fuel_orders_data:/app/fuel_orders_data
+      - ./logs:/app/logs
+    environment:
+      - TZ=America/Los_Angeles
+    
+  # Future services to uncomment and configure when ready
+  
+  # database:
+  #   image: postgres:14
+  #   container_name: petroleum-database
+  #   restart: unless-stopped
+  #   environment:
+  #     - POSTGRES_USER=petro
+  #     - POSTGRES_PASSWORD=secure_password
+  #     - POSTGRES_DB=petroleum_data
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #     - ./db/init:/docker-entrypoint-initdb.d
+  #   ports:
+  #     - "5432:5432"
+
+  # ai-chatbot:
+  #   build: 
+  #     context: ./chatbot
+  #     dockerfile: Dockerfile
+  #   container_name: petroleum-chatbot
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - database
+  #   environment:
+  #     - DATABASE_URL=postgresql://petro:secure_password@database:5432/petroleum_data
+  #   ports:
+  #     - "8000:8000"
+
+  # web-frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   container_name: petroleum-frontend
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - ai-chatbot
+  #   ports:
+  #     - "80:80"
+
+# Uncomment when database service is enabled
+# volumes:
+#   postgres_data:

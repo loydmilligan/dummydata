@@ -1,2 +1,6 @@
 faker>=37.0.0
 python-dateutil>=2.8.2
+
+# Database requirements (commented for future use)
+# psycopg2-binary>=2.9.5
+# SQLAlchemy>=2.0.0
